@@ -1,5 +1,6 @@
 import puppeteer, { Browser, Page } from "puppeteer";
-import { BeforeAll, AfterAll } from "cucumber";
+import { BeforeAll, AfterAll, Before, After } from "cucumber";
+import { before, after } from "cucumber-tsflow";
 
 BeforeAll(async () => {
     browser = await puppeteer.launch({
@@ -14,11 +15,20 @@ AfterAll(async () => {
 });
 
 let browser!: Browser;
+let page!: Page;
+
+Before(async () => {
+    const context = await browser.createIncognitoBrowserContext();
+    page = await context.newPage();
+});
+
+After(async () => {
+    await page.close();
+});
 
 export class Workspace {
-    private page!: Page;
 
-    public async getPage() {
-        return this.page || (this.page = await browser.newPage());
+    public get currentPage() {
+        return page;
     }
 }

@@ -18,7 +18,7 @@ export class NewSearchSteps {
 
     @given(/the user navigates to Google/)
     public async userNavigatesToGoogle() {
-        this.googlePage = await navigate(await this.workspace.getPage(), GoogleSearchPage);
+        this.googlePage = await navigate(this.workspace.currentPage, GoogleSearchPage);
     }
 
     @when(/the user types "(.*)" into the search bar/)
@@ -43,7 +43,7 @@ export class NewSearchSteps {
 
     @then(/the user should be on the GitHub website/)
     public async userShouldBeOnGitHubWebsite() {
-        const currentPage = await this.workspace.getPage();
+        const currentPage = this.workspace.currentPage;
 
         await currentPage.waitForNavigation();
 
@@ -52,7 +52,7 @@ export class NewSearchSteps {
 
     @then(/the page should match the current snapshot for "(.*)"/)
     public async pageSnapshotsMatch(imageName: string) {
-        const currentPage = await this.workspace.getPage();
+        const currentPage = this.workspace.currentPage;
 
         const { percentageDiff } = await getScreenshotDiff(currentPage, `${__dirname}/screenshots/${imageName}`);
 

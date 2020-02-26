@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: xchecker-preview-ingress
+spec:
+  tls:
+  - hosts:
+    - pr-#{System.PullRequest.PullRequestNumber}#.preview.adeptive.uk
+    secretName: tls-secret
+  rules:
+    - host: pr-#{System.PullRequest.PullRequestNumber}#.preview.adeptive.uk
+      http:
+        paths:
+        - backend:
+            serviceName: sharechecker-ui-service
+            servicePort: 3000

@@ -1,0 +1,6 @@
+# npm
+node_modules
+
+# screenshot tests
+*.actual.png
+*.diff.png

@@ -1,0 +1,24 @@
+{
+   "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "strict": true,
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
+      "noImplicitAny": true,
+      "sourceMap": true,
+      "preserveConstEnums": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "esModuleInterop": true,
+      "newLine": "LF"
+   },
+   "exclude": [
+      "./**/*.d.ts",
+      "node_modules"
+   ],
+   "include": [
+      "./**/*.ts",
+      "./**/*.tsx"
+   ]
+}

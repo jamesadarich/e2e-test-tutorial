@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: -deployment # name BEFORE Kustomize transforms it
+spec:
+  template:
+    spec:
+      containers:
+      - name: sharechecker-ui
+        # this will ensure a new copy has been built per preview, may want to change this to in future
+        # only run those that have changed and take "latest" tag otherwise
+        image: #{registry-name}#.azurecr.io/sharechecker-ui:#{Build.BuildId}#

@@ -1,0 +1,10 @@
+namespace: pr-#{System.PullRequest.PullRequestNumber}#
+bases:
+  - ../../devops/environment-setup/
+  - ../../ui/devops/kubernetes-yaml/
+resources:
+  - namespace.yaml
+  - container-registry-secret.yaml
+patchesStrategicMerge:
+  - ingress.yaml
+  - ui-deployment.yaml

@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test:lint": "eslint \"./**/*.{ts,tsx}\" --max-warnings 0",
-    "test:features": "cucumber-js features/**/*.feature --require-module ts-node/register --require \"features/**/*.spec.ts\" --require utils/testing/workspace.ts --format node_modules/cucumber-pretty"
+    "test:features": "cucumber-js features/**/*.feature --require-module ts-node/register --require \"features/**/*.spec.ts\" --require utils/testing/workspace.ts"
   },
   "dependencies": {
     "chai": "^4.2.0",

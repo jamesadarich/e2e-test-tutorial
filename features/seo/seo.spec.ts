@@ -45,17 +45,28 @@ export class NewSearchSteps {
     public async userShouldBeOnGitHubWebsite() {
         const currentPage = this.workspace.currentPage;
 
-        await currentPage.waitForNavigation();
+        await currentPage.waitForNavigation({ waitUntil: "networkidle0" });
 
         expect(currentPage.url()).to.equal("https://github.com/");
     }
 
-    @then(/the page should match the current snapshot for "(.*)"/)
+    @then(/the page should match the current snapshot for "(.*)"/, undefined, 10000)
     public async pageSnapshotsMatch(imageName: string) {
         const currentPage = this.workspace.currentPage;
 
-        const { percentageDiff } = await getScreenshotDiff(currentPage, `${__dirname}/screenshots/${imageName}`);
-
-        expect(percentageDiff).to.equal(0);
+        try {
+            const { percentageDiff } = await getScreenshotDiff(currentPage, `${__dirname}/screenshots/${imageName}`);
+            expect(percentageDiff).to.equal(0);
+        }
+        catch (e1) {
+            try {
+                const { percentageDiff } = await getScreenshotDiff(currentPage, `${__dirname}/screenshots/${imageName}-b`);
+                expect(percentageDiff).to.equal(0);
+            }
+            catch (e2) {
+                const { percentageDiff } = await getScreenshotDiff(currentPage, `${__dirname}/screenshots/${imageName}-c`);
+                expect(percentageDiff).to.equal(0);
+            }
+        }
     }
 }

@@ -1,6 +1,5 @@
 import puppeteer, { Browser, Page } from "puppeteer";
 import { BeforeAll, AfterAll, Before, After } from "cucumber";
-import { before, after } from "cucumber-tsflow";
 
 BeforeAll(async () => {
     browser = await puppeteer.launch({
